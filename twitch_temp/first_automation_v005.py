@@ -17,7 +17,7 @@ link = "https://twitch.tv"
 
 class Test_Twitch (unittest.TestCase):
     def setUp(self) -> None:
-        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)  # Подключаем опцию тут
+        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)  # Подключаем опцию
         self.driver.set_window_size (1024, 768)
 
     def test_registered_user(self):
