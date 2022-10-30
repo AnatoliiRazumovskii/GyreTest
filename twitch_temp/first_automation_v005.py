@@ -18,17 +18,17 @@ link = "https://twitch.tv"
 class Test_Twitch (unittest.TestCase):
     def setUp(self) -> None:
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)  # Подключаем опцию
-        self.driver.set_window_size (1024, 768)
+        self.driver.set_window_size(1024, 768)
 
     def test_registered_user(self):
         self.driver.get(link)
 
         print('browser is open')
 
-        btn_cookie = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, '[data-a-target="consent-banner-accept"]')))
-        btn_cookie.click()
-
-        time.sleep(1)
+        # btn_cookie = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, '[data-a-target="consent-banner-accept"]')))
+        # btn_cookie.click()
+        #
+        # time.sleep(1)
 
         btn_registration = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, '[data-test-selector="anon-user-menu__login-button"]')))
         btn_registration.click()
