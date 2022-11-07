@@ -1,6 +1,7 @@
 import time
 import unittest
 from selenium import webdriver
+from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -25,17 +26,22 @@ class Test_Twitch (unittest.TestCase):
 
         print('browser is open')
 
-        btn_cookie = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, '[data-a-target="consent-banner-accept"]')))
-        btn_cookie.click()
+        driverwait = WebDriverWait(self.driver, 2)
+
+        try:
+            btn_cookie = driverwait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '[data-a-target="consent-banner-accept"]')), "екшфд ьып")
+            btn_cookie.click()
+
+        except TimeoutException as a:
+            print("No Cookie banner")
+            print(a.msg)
+        # except Exception as e:
+        #     print("No Cookie banner")
 
         time.sleep(1)
 
-        btn_registration = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, '[data-test-selector="anon-user-menu__login-button"]')))
+        btn_registration = driverwait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '[data-test-selector="anon-user-menu__login-button"]')))
         btn_registration.click()
-        try:
-            print(x)
-        except:
-            print("An exception occurred")
 
         time.sleep(1)
 
@@ -51,7 +57,7 @@ class Test_Twitch (unittest.TestCase):
         btn_enter.click()
         print('click Enter')
 
-        time.sleep(10)
+        time.sleep(2)
 
     def tearDown(self) -> None:
         self.driver.close()
